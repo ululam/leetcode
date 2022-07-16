@@ -17,19 +17,26 @@ class Solution {
     public int diameterOfBinaryTree(TreeNode root) {
         RD rd = new RD();
         radius(root, rd);
-        return rd.diameter;
+        return rd.path.size() - 1;
     }
     
-    private int radius(TreeNode node, RD maxRD) {
-        int rightR = node.right != null ? radius(node.right, maxRD) : 0;
-        int leftR = node.left != null ? radius(node.left, maxRD) : 0;
-        int curRadius = Math.max(rightR, leftR) + 1;
-        int currentDiameter = rightR + leftR;
-        maxRD.diameter = Math.max(currentDiameter, maxRD.diameter);
+    private List radius(TreeNode node, RD maxRD) {
+        List rightR = node.right != null ? radius(node.right, maxRD) : new ArrayList();
+        List leftR = node.left != null ? radius(node.left, maxRD) : new ArrayList();
+        List curRadius = rightR.size() > leftR.size() ? rightR : leftR;
+        curRadius.add(0, node);
+        
+        int currentDiameter = rightR.size() + leftR.size();
+        
+        if (currentDiameter > maxRD.path.size()) {
+            maxRD.path = new ArrayList(rightR);
+            maxRD.path.addAll(leftR);
+        }
+        
         return curRadius;
     }
 }
 
 class RD {
-    int diameter;
+    List path = new ArrayList();
 }
