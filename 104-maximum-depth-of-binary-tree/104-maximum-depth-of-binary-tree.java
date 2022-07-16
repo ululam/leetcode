@@ -25,16 +25,16 @@ class Solution {
         if (root == null) {
             return 0;
         }
-        Stack<TreeNode> nodes = new Stack<>();
-        Stack<Integer> depths = new Stack<>();
+        LinkedList<TreeNode> nodes = new LinkedList<>();
+        LinkedList<Integer> depths = new LinkedList<>();
         int currentDepth = 0, maxDepth = 0;
         
         nodes.push(root);
         depths.push(1);
         
         while (!nodes.isEmpty()) {
-            TreeNode node = nodes.pop();
-            currentDepth = depths.pop();
+            TreeNode node = nodes.pollLast();
+            currentDepth = depths.pollLast();
             if (node != null) {
                 maxDepth = maxDepth > currentDepth ? maxDepth : currentDepth;
                 nodes.push(node.left);
