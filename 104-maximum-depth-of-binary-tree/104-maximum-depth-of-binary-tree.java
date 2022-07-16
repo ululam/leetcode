@@ -35,10 +35,12 @@ class Solution {
         while (!nodes.isEmpty()) {
             TreeNode node = nodes.pollLast();
             currentDepth = depths.pollLast();
-            if (node != null) {
-                maxDepth = maxDepth > currentDepth ? maxDepth : currentDepth;
+            maxDepth = maxDepth > currentDepth ? maxDepth : currentDepth;
+            if (node.left != null) {
                 nodes.push(node.left);
                 depths.push(currentDepth + 1);
+            }
+            if (node.right != null) {
                 nodes.push(node.right);
                 depths.push(currentDepth + 1);
             }
