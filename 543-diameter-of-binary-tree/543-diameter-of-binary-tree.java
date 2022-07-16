@@ -17,6 +17,7 @@ class Solution {
     public int diameterOfBinaryTree(TreeNode root) {
         RD rd = new RD();
         radius(root, rd);
+        rd.path.forEach(n -> System.out.print(n.val + " -> "));
         return rd.path.size() - 1;
     }
     
@@ -38,5 +39,5 @@ class Solution {
 }
 
 class RD {
-    List path = new ArrayList();
+    List<TreeNode> path = new ArrayList();
 }
