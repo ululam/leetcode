@@ -25,28 +25,28 @@ class Solution {
         if (root == null) {
             return 0;
         }
-        LinkedList<TreeNode> nodes = new LinkedList<>();
-        LinkedList<Integer> depths = new LinkedList<>();
+        Stack<TreeNode> nodes = new Stack<>();
+        Stack<Integer> depths = new Stack<>();
         int currentDepth = 0, maxDepth = 0;
-        
+        TreeNode currentNode;
         nodes.push(root);
         depths.push(1);
         
         while (!nodes.isEmpty()) {
-            TreeNode node = nodes.pollLast();
-            currentDepth = depths.pollLast();
+            currentNode = nodes.pop();
+            currentDepth = depths.pop();
             maxDepth = maxDepth > currentDepth ? maxDepth : currentDepth;
-            if (node.left != null) {
-                nodes.push(node.left);
+            if (currentNode.left != null) {
+                nodes.push(currentNode.left);
                 depths.push(currentDepth + 1);
             }
-            if (node.right != null) {
-                nodes.push(node.right);
+
+            if (currentNode.right != null) {
+                nodes.push(currentNode.right);
                 depths.push(currentDepth + 1);
             }
         }
         
         return maxDepth;
     }
-
 }
