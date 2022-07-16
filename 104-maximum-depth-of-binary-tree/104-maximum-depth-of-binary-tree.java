@@ -14,10 +14,37 @@
  * }
  */
 class Solution {
-    public int maxDepth(TreeNode root) {
+    public int maxDepth2(TreeNode root) {
         if (root == null) {
             return 0;
         }
         return Math.max(maxDepth(root.left),  maxDepth(root.right)) + 1;
     }
+
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        Stack<TreeNode> nodes = new Stack<>();
+        Stack<Integer> depths = new Stack<>();
+        int currentDepth = 0, maxDepth = 0;
+        
+        nodes.push(root);
+        depths.push(1);
+        
+        while (!nodes.isEmpty()) {
+            TreeNode node = nodes.pop();
+            currentDepth = depths.pop();
+            if (node != null) {
+                maxDepth = maxDepth > currentDepth ? maxDepth : currentDepth;
+                nodes.push(node.left);
+                depths.push(currentDepth + 1);
+                nodes.push(node.right);
+                depths.push(currentDepth + 1);
+            }
+        }
+        
+        return maxDepth;
+    }
+
 }
