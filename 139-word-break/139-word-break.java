@@ -17,41 +17,26 @@ class Solution {
             }
         }
         
-        return consists(s, parts);
+        return consists(s, parts, 0, new Boolean[s.length()]);
     }
     
-    private boolean consists(String s, Set<String> parts) {
-        //p("%s'%s' ~ %s", t(), s, parts);
-        if (s.length() == 0) {
+    private boolean consists(String s, Set<String> parts, int start, Boolean[] seen) {
+        if (start == s.length()) {
             return true;
         }
-        for (String w : parts) {
-            if (!s.contains(w)) {
-                continue;
-            }
-            String s1 = s.replaceAll(w, " ");
-            if (s1.trim().length() == 0) {
-                return true;
-            }
-            
-            Set<String> narrowParts = new HashSet<>(parts);
-            narrowParts.remove(w);
-            
-            level++;
-            boolean allFound = true;
-            for (String s2 : s1.split(" ")) {
-                allFound = consists(s2, narrowParts); 
-                if (!allFound) {
-                    break;
-                }
-            }
-            if (allFound) {
-                return true;
-            }
-            level--;
+        
+        if (seen[start] != null) {
+            return seen[start];
         }
         
-        return false;
+        for (int i=start+1;i<=s.length(); i++) {
+            String prefix = s.substring(start, i);
+            if (parts.contains(prefix) && consists(s, parts, i, seen)) {
+                return seen[start] = true;
+            }
+        }
+        
+        return seen[start] = false;
     }
     
     private void p(String s, Object... params) {
