@@ -4,12 +4,14 @@ class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
         final Set<String> words = new HashSet<>(wordDict);
         final Queue<Integer> queue = new LinkedList<>();
-        boolean[] visited = new boolean[s.length()];
         queue.add(0);
+        
+        boolean[] seen = new boolean[s.length()];
         
         while (!queue.isEmpty()) {
             int start = queue.poll();
-            if (visited[start]) {
+            
+            if (seen[start]) {
                 continue;
             }
             
@@ -22,7 +24,7 @@ class Solution {
                     queue.add(i);
                 }
             }
-            visited[start] = true;
+            seen[start] = true;
         }
         
         return false;
