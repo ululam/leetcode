@@ -10,12 +10,12 @@ class Solution {
         // - If no, go to (a), with "contains" check.
         // - If all words are interated, false
         
-        Set<String> parts = new HashSet<>(wordDict);
-        // for (String w : wordDict) {
-        //     if (s.contains(w)) {
-        //         parts.add(w);
-        //     }
-        // }
+        Set<String> parts = new HashSet<>();
+        for (String w : wordDict) {
+            if (s.contains(w)) {
+                parts.add(w);
+            }
+        }
         
         return consists(s, parts, 0, new Boolean[s.length()]);
     }
