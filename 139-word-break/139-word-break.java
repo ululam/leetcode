@@ -38,17 +38,4 @@ class Solution {
         
         return seen[start] = false;
     }
-    
-    private void p(String s, Object... params) {
-        System.out.printf(s + "\n", params);
-    }
-    
-    private String t() {
-        StringBuffer res = new StringBuffer();
-        for (int i=0; i<level;i++) {
-            res.append("  ");
-        }
-        
-        return res.toString();
-    }
 }
