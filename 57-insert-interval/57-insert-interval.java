@@ -60,6 +60,6 @@ class Solution {
     }
     
     private static void p(String s, Object... vals) {
-        System.out.printf(s+"\n", vals);
+        //System.out.printf(s+"\n", vals);
     }
 }
