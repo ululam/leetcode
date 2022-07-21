@@ -1,6 +1,6 @@
 class Solution {
     public int[][] insert(int[][] intervals, int[] newin) {
-        List<int[]> result = new ArrayList<>();
+        List<int[]> result = new LinkedList<>();
         for(int[] in : intervals) {
             if(newin[1] < in[0]) {
                result.add(newin);
