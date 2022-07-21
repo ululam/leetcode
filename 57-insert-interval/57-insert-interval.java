@@ -36,11 +36,11 @@ class Solution {
         }
         
         
-        p("Resulting new interval: [%s,%s]", newInterval[0], newInterval[1]);
-        p("start pos is %s", startPos);
-        p("end pos is %s", endPos);
+//         p("Resulting new interval: [%s,%s]", newInterval[0], newInterval[1]);
+//         p("start pos is %s", startPos);
+//         p("end pos is %s", endPos);
         
-        p("Before removal, list is: [%s]", intervalList.stream().map(Arrays::toString).collect(Collectors.joining(",")));
+//         p("Before removal, list is: [%s]", intervalList.stream().map(Arrays::toString).collect(Collectors.joining(",")));
 
         if (startPos >= 0) {
             if (endPos < 0) endPos = startPos;
@@ -52,7 +52,7 @@ class Solution {
             startPos = intervals.length;
         }
         
-        p("After removal, list is: [%s]", intervalList.stream().map(Arrays::toString).collect(Collectors.joining(",")));
+        // p("After removal, list is: [%s]", intervalList.stream().map(Arrays::toString).collect(Collectors.joining(",")));
         
         intervalList.add(startPos, newInterval);
         
