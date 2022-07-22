@@ -1,16 +1,19 @@
 class Solution {
+    private static final int START = 0;
+    private static final int END = 1;
+    
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        List<int[]> res = new ArrayList<>(intervals.length + 1);
+        List<int[]> res = new LinkedList<>();
         int[] newin = newInterval;
         for (int[] in : intervals) {
-            if (in[1] < newin[0]) {
+            if (in[END] < newin[START]) {
                 res.add(in);
-            } else if (in[0] > newin[1]) {
+            } else if (in[START] > newin[END]) {
                 res.add(newin);
                 newin = in;
             } else {
-                newin[0] = Math.min(newin[0], in[0]);
-                newin[1] = Math.max(newin[1], in[1]);
+                newin[START] = Math.min(in[START], newin[START]);
+                newin[END] = Math.max(in[END], newin[END]);
             }
         }
         
