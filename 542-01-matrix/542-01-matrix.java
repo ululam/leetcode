@@ -1,60 +1,49 @@
 class Solution {
     public int[][] updateMatrix(int[][] mat) {
-        for (int i=0;i<mat.length;i++) {
-            for (int j=0;j<mat[i].length;j++) {
-                if (mat[i][j] == 1) {
-                    mat[i][j] = Integer.MAX_VALUE;
+        final int rows = mat.length;
+        if (rows == 0) {
+            return mat;
+        }
+        final int cols = mat[0].length;
+        
+        final int[][] dists = new int[rows][cols];
+        final Queue<Tuple> queue = new LinkedList<>();
+        for (int i=0; i< rows; i++) {
+            for (int j=0; j<cols; j++) {
+                dists[i][j] = Integer.MAX_VALUE;
+                if (mat[i][j] == 0) {
+                    dists[i][j] = 0;
+                    queue.add(new Tuple(i,j));
                 }
             }
         }
-
-        boolean allSet = false;
-        int curr0 = -1;
-        while (!allSet) {
-            if (++curr0 > mat.length + mat[0].length) {
-                break;
-            };
-            allSet = true;
-            //System.out.printf("curr0 = %s\n", curr0);
-            for (int i=0;i<mat.length;i++) {
-                for (int j=0;j<mat[i].length;j++) {
-                    if (mat[i][j] < Integer.MAX_VALUE) {
-                        continue;
-                    }
-                    allSet = false;
-                    if (i > 0 && mat[i-1][j] == curr0) {
-                        mat[i][j] = Math.min(curr0 + 1, mat[i][j]);
-                        //System.out.printf("Set [%s][%s] = %s\n", i,j, mat[i][j]);
-                        continue;
-                    }
-                    if (i < mat.length-1  && mat[i+1][j] == curr0) {
-                        mat[i][j] = Math.min(curr0 + 1, mat[i][j]);
-                        //System.out.printf("Set [%s][%s] = %s\n", i,j, mat[i][j]);
-                        continue;
-                    }
-                    if (j > 0  && mat[i][j-1] == curr0) {
-                        mat[i][j] = Math.min(curr0 + 1, mat[i][j]);
-                        //System.out.printf("Set [%s][%s] = %s\n", i,j, mat[i][j]);
-                        continue;
-                    }
-                    if (j < mat[i].length - 1  && mat[i][j+1] == curr0) {
-                        mat[i][j] = Math.min(curr0 + 1, mat[i][j]);
-                        // System.out.printf("Set [%s][%s] = %s\n", i,j, mat[i][j]);
-                        continue;
+        int moves[][] = new int[][] {
+            {-1, 0}, {1, 0}, {0, -1}, {0, 1}
+        };
+        
+        while (!queue.isEmpty()) {
+            Tuple t = queue.poll();
+            for (int i=0; i<4; i++) {
+                int row = t.row + moves[i][0];
+                int col = t.col + moves[i][1];
+                if (row >= 0 && col >= 0 && row < rows && col < cols) {
+                    if (dists[row][col] > dists[t.row][t.col] + 1) {
+                        dists[row][col] = dists[t.row][t.col] + 1;
+                        queue.add(new Tuple(row, col));
                     }
                 }
             }
         }
         
-        return mat;
+        return dists;
     }
     
-    private boolean setAndReturnIfChanged(int[][] mat, int i, int j, int val) {
-        if (mat[i][j] > val) {
-            mat[i][j] = val;
-            return true;
+    private class Tuple {
+        final int row;
+        final int col;
+        Tuple(int row, int col) {
+            this.row = row;
+            this.col = col;
         }
-        
-        return false;
     }
 }
