@@ -6,7 +6,7 @@ class Solution {
 
         for (int i=0; i< rows; i++) {
             for (int j=0; j< cols; j++) { 
-                dists[i][j] = Integer.MAX_VALUE - 10000;
+                dists[i][j] = Integer.MAX_VALUE >> 1;
             }
         }
 
