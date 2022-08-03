@@ -1,17 +1,22 @@
-import java.util.Map.Entry;
-//import java.util.stream.Stream;
+
 
 class Solution {
     public int[][] kClosest(int[][] points, int k) {
+        if (k == points.length) {
+            return points;
+        }
+        if (k == 0) {
+            return new int[0][0];
+        }
         return quickSelect(points, k);
     }
     
     private int[][] quickSelect(int[][] points, int k) {
-        int left = 0;
+        int left = 0; 
         int right = points.length - 1;
-        int pivotIndex = points.length;
-        while (pivotIndex != k) {
-            pivotIndex = partition(points, left, right);
+        int pivotIndex;
+        while ((pivotIndex = partition(points, left, right)) != k) {
+            System.out.printf("Pivot index is %s\n", pivotIndex);
             if (pivotIndex < k) {
                 left = pivotIndex;
             } else {
@@ -20,13 +25,11 @@ class Solution {
         }
         
         return Arrays.copyOf(points, k);
-    }    
-    
+    }
+
     private int partition(int[][] points, int left, int right) {
-        final int pivotIndex = selectPivot(left, right);
-        final int[] pivotPoint = points[pivotIndex];
-        final int pivotDist = dist(pivotPoint);
-        
+        final int pivotIndex = choosePivot(left, right);
+        final int pivotDist = dist(points[pivotIndex]);
         while (left < right) {
             if (dist(points[left]) >= pivotDist) {
                 swap(points, left, right);
@@ -36,20 +39,20 @@ class Solution {
             }
         }
         
-        // Should break through pivot
-        if (dist(points[left]) < pivotDist) left++;
+        if (dist(points[left]) < pivotDist) 
+            left++;
         
         return left;
     }
-    
+
     private void swap(int[][] points, int left, int right) {
         int[] tmp = points[left];
         points[left] = points[right];
         points[right] = tmp;
     }
     
-    private int selectPivot(int left, int right) {
-        return (left + right) / 2;
+    private int choosePivot(int left, int right) {
+        return (left + right)/2;
     }
     
     private int dist(int[] p) {
