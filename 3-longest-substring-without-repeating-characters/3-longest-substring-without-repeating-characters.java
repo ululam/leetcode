@@ -29,9 +29,6 @@ class Solution {
             if (seenChars[c_idx] != null && seenChars[c_idx] >= start) {
                 max_len = Math.max(max_len, i - start);
                 start = seenChars[c_idx] + 1;
-                p("> '%s', max_len = %s, len = %s, start = %s, i = %s", chars[i], max_len, i - start, start, i);
-            } else {
-                p("'%s', max_len = %s, len = %s, start = %s, i = %s", chars[i], max_len, i - start, start, i);
             }
             // TODO For 0 pos, here lies a problem
             seenChars[c_idx] = i;
