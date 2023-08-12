@@ -20,9 +20,10 @@ class Solution(object):
 
         numStr = ""
         billions = intNum // 1000000000
+        if billions > 0:
+            numStr = self.getStrRepresentation(billions, "Billion")
+            intNum -= billions * 1000000000
 
-        numStr = "" if billions == 0 else self.getStrRepresentation(billions, "Billion")
-        intNum -= billions * 1000000000
         millions = intNum // 1000000
         if millions > 0:
             numStr = self.addPart(numStr, self.getStrRepresentation(millions, "Million"))
