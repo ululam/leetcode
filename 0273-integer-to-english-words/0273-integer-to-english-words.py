@@ -22,18 +22,19 @@ class Solution(object):
         billions = intNum // 1000000000
 
         numStr = "" if billions == 0 else self.getStrRepresentation(billions, "Billion")
-        
-        millions = (intNum - billions * 1000000000) // 1000000
+        intNum -= billions * 1000000000
+        millions = intNum // 1000000
         if millions > 0:
             numStr = self.addPart(numStr, self.getStrRepresentation(millions, "Million"))
+            intNum -= millions * 1000000
 
-        thousands = (intNum - billions * 1000000000 - millions * 1000000) // 1000
+        thousands = intNum // 1000
         if thousands > 0:
             numStr = self.addPart(numStr, self.getStrRepresentation(thousands, "Thousand"))
+            intNum -= thousands * 1000
 
-        leftOver = intNum - billions * 1000000000 - millions * 1000000 - thousands * 1000
-        if leftOver > 0:
-            numStr = self.addPart(numStr, self.getStrRepresentation(leftOver, ""))
+        if intNum > 0:
+            numStr = self.addPart(numStr, self.getStrRepresentation(intNum, ""))
         
         return numStr #.strip()
 
