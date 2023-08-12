@@ -17,9 +17,10 @@ class Solution(object):
         intNum = int(num)
         if intNum == 0:
             return "Zero"
+
         numStr = ""
         billions = intNum / 1000000000
-        # here we know that its not more than 4
+
         numStr += "" if billions == 0 else self.getStrRepresentation(billions, "Billion")
         
         millions = (intNum - billions * 1000000000) / 1000000
@@ -54,7 +55,7 @@ class Solution(object):
             return numStr
 
         hundreds = numLess1000 / 100
-        numStr += "" if hundreds == 0 else self.fromOneToNine(hundreds) + " " + self.getPlural(hundreds, "Hundred")
+        numStr += "" if hundreds == 0 else self.fromOneToNine(hundreds) + " Hundred"
         leftOver = numLess1000 - hundreds * 100
         if leftOver > 0:
             numStr += " " if len(numStr) > 0 else ""
@@ -64,10 +65,4 @@ class Solution(object):
             return numStr
 
 
-        return numStr + " " + self.getPlural(numLess1000, name)
-
-    def getPlural(self, num, str):
-        return str
-        # if num == 1:
-        #     return str
-        # return str + "s"
+        return numStr + " " + name
