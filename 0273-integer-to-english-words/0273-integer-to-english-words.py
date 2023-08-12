@@ -57,25 +57,17 @@ class Solution(object):
             return ""
 
         hundreds = numLess1000 // 100
-        hundredStr = ""
+        result = ""
         if hundreds > 0:
-            hundredStr = self.fromOneToNine(hundreds) + " Hundred"
-        print("hundredStr: '" + hundredStr + "'")
+            result = self.fromOneToNine(hundreds) + " Hundred"
 
         leftOver = numLess1000 - hundreds * 100
-        addOn = ""
         if leftOver > 0:
-            addOn = self.fromOneToNineteen(leftOver) if leftOver < 20 else self.fromTwentyToNinety(leftOver)
-        print("addOn: '" + addOn + "'")
-
-        if hundreds > 0 and leftOver > 0:
-            resultStr = hundredStr + " " + addOn
-        elif hundreds > 0:
-            resultStr = hundredStr
-        else:
-            resultStr = addOn
+            if len(result) > 0:
+                result += " "
+            result += self.fromOneToNineteen(leftOver) if leftOver < 20 else self.fromTwentyToNinety(leftOver)
         
-        return resultStr if len(name) == 0 else resultStr + " " + name 
+        return result if len(name) == 0 else result + " " + name 
 
     def addPart(self, prevStr, text):
         return text if len(prevStr) == 0 else prevStr + " " + text
