@@ -24,11 +24,11 @@ class Solution(object):
         for div, name in Solution.DIVIDERS.items():
             ions = intNum // div
             if (ions > 0):
-                numStr = self.addPart(numStr, self.getStrRepresentation(ions, name))
+                numStr = self.addPart(numStr, self.fromHundreds(ions, name))
                 intNum -= ions * div                
 
         if intNum > 0:
-            numStr = self.addPart(numStr, self.getStrRepresentation(intNum, ""))
+            numStr = self.addPart(numStr, self.fromHundreds(intNum, ""))
         
         return numStr #.strip()
 
@@ -47,7 +47,7 @@ class Solution(object):
     def fromOneToNineteen(self, num):
         return self.fromOneToNine(num) if num < 10 else self.fromTenToNineteen(num)
 
-    def getStrRepresentation(self, numLess1000, name):
+    def fromHundreds(self, numLess1000, name):
         if numLess1000 == 0:
             return ""
 
@@ -58,9 +58,8 @@ class Solution(object):
 
         leftOver = numLess1000 - hundreds * 100
         if leftOver > 0:
-            if len(result) > 0:
-                result += " "
-            result += self.fromOneToNineteen(leftOver) if leftOver < 20 else self.fromTwentyToNinety(leftOver)
+            addOn = self.fromOneToNineteen(leftOver) if leftOver < 20 else self.fromTwentyToNinety(leftOver)
+            result = self.addPart(result, addOn)
         
         return result if len(name) == 0 else result + " " + name 
 
