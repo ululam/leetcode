@@ -1,7 +1,8 @@
 class Solution(object):
     ONE_DIGIT = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
     TEEN = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
-
+    TIES = ["Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
+    
     def numberToWords(self, num):
         # max int = 4_294_967_296
         # 1. Transfer num to int
@@ -36,23 +37,7 @@ class Solution(object):
         decims = num / 10
         leftOVer = num - decims * 10
         leftOVer = "" if leftOVer == 0 else " " + self.fromOneToNine(leftOVer)
-        if decims == 2:
-            return "Twenty" + leftOVer
-        if decims == 3:
-            return "Thirty" + leftOVer
-        if decims == 4:
-            return "Forty" + leftOVer
-        if decims == 5:
-            return "Fifty" + leftOVer
-        if decims == 6:
-            return "Sixty" + leftOVer
-        if decims == 7:
-            return "Seventy" + leftOVer
-        if decims == 8:
-            return "Eighty" + leftOVer
-        if decims == 9:
-            return "Ninety" + leftOVer    
-        raise Exception("Number beyond range: " + str(num))
+        return Solution.TIES[decims-2] + leftOVer
 
     def fromTenToNineteen(self, num):
         return Solution.TEEN[num-10]
