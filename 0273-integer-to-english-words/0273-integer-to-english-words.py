@@ -21,18 +21,21 @@ class Solution(object):
         numStr = ""
         billions = intNum // 1000000000
 
-        numStr += "" if billions == 0 else self.getStrRepresentation(billions, "Billion")
+        numStr = "" if billions == 0 else self.getStrRepresentation(billions, "Billion")
         
         millions = (intNum - billions * 1000000000) // 1000000
-        numStr += "" if millions == 0 else " " + self.getStrRepresentation(millions, "Million")
+        if millions > 0:
+            numStr = self.addPart(numStr, self.getStrRepresentation(millions, "Million"))
 
         thousands = (intNum - billions * 1000000000 - millions * 1000000) // 1000
-        numStr += "" if thousands == 0 else " " + self.getStrRepresentation(thousands, "Thousand")
+        if thousands > 0:
+            numStr = self.addPart(numStr, self.getStrRepresentation(thousands, "Thousand"))
 
         leftOver = intNum - billions * 1000000000 - millions * 1000000 - thousands * 1000
-        numStr += "" if leftOver == 0 else " " + self.getStrRepresentation(leftOver, "")
+        if leftOver > 0:
+            numStr = self.addPart(numStr, self.getStrRepresentation(leftOver, ""))
         
-        return numStr.strip()
+        return numStr #.strip()
 
     def fromTwentyToNinety(self, num):
         decims = num // 10   # We know its > 0
@@ -50,19 +53,29 @@ class Solution(object):
         return self.fromOneToNine(num) if num < 10 else self.fromTenToNineteen(num)
 
     def getStrRepresentation(self, numLess1000, name):
-        numStr = ""
         if numLess1000 == 0:
-            return numStr
+            return ""
 
         hundreds = numLess1000 // 100
-        numStr += "" if hundreds == 0 else self.fromOneToNine(hundreds) + " Hundred"
+        hundredStr = ""
+        if hundreds > 0:
+            hundredStr = self.fromOneToNine(hundreds) + " Hundred"
+        print("hundredStr: '" + hundredStr + "'")
+
         leftOver = numLess1000 - hundreds * 100
+        addOn = ""
         if leftOver > 0:
-            numStr += " " if len(numStr) > 0 else ""
-            numStr += self.fromOneToNineteen(leftOver) if leftOver < 20 else self.fromTwentyToNinety(leftOver)
+            addOn = self.fromOneToNineteen(leftOver) if leftOver < 20 else self.fromTwentyToNinety(leftOver)
+        print("addOn: '" + addOn + "'")
 
-        if name == "":
-            return numStr
+        if hundreds > 0 and leftOver > 0:
+            resultStr = hundredStr + " " + addOn
+        elif hundreds > 0:
+            resultStr = hundredStr
+        else:
+            resultStr = addOn
+        
+        return resultStr if len(name) == 0 else resultStr + " " + name 
 
-
-        return numStr + " " + name
+    def addPart(self, prevStr, text):
+        return text if len(prevStr) == 0 else prevStr + " " + text
