@@ -1,4 +1,6 @@
 class Solution(object):
+    ONE_DIGIT = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
+
     def numberToWords(self, num):
         # max int = 4_294_967_296
         # 1. Transfer num to int
@@ -75,25 +77,8 @@ class Solution(object):
         raise Exception("Number beyond range: " + str(num))
 
     def fromOneToNine(self, num):
-        if num == 1:
-            return "One"
-        if num == 2:
-            return "Two"
-        if num == 3:
-            return "Three"
-        if num == 4:
-            return "Four"
-        if num == 5:
-            return "Five"
-        if num == 6:
-            return "Six"
-        if num == 7:
-            return "Seven"
-        if num == 8:
-            return "Eight"
-        if num == 9:
-            return "Nine"
-        raise Exception("Number beyond range: " + str(num))
+        return Solution.ONE_DIGIT[num-1]
+        # raise Exception("Number beyond range: " + str(num))
 
     def fromOneToNineteen(self, num):
         return self.fromOneToNine(num) if num < 10 else self.fromTenToNineteen(num)
