@@ -17,18 +17,12 @@ class Solution(object):
         billions = intNum / 1000000000
         # here we know that its not more than 4
         numStr += "" if billions == 0 else self.getStrRepresentation(billions, "Billion")
-        print("billions: " + str(billions))
-        print("numStr: '" + numStr + "'")
         
         millions = (intNum - billions * 1000000000) / 1000000
         numStr += "" if millions == 0 else " " + self.getStrRepresentation(millions, "Million")
-        print("millions: " + str(millions))
-        print("numStr: '" + numStr + "'")
 
         thousands = (intNum - billions * 1000000000 - millions * 1000000) / 1000
         numStr += "" if thousands == 0 else " " + self.getStrRepresentation(thousands, "Thousand")
-        print("thousands: " + str(thousands))
-        print("numStr: '" + numStr + "'")
 
         leftOver = intNum - billions * 1000000000 - millions * 1000000 - thousands * 1000
         numStr += "" if leftOver == 0 else " " + self.getStrRepresentation(leftOver, "")
@@ -58,7 +52,6 @@ class Solution(object):
         raise Exception("Number beyond range: " + str(num))
 
     def fromTenToNineteen(self, num):
-        print("    fromTenToNineteen: got num: " + str(num))
         if num == 10:
             return "Ten"
         if num == 11:
@@ -112,11 +105,7 @@ class Solution(object):
 
         hundreds = numLess1000 / 100
         numStr += "" if hundreds == 0 else self.fromOneToNine(hundreds) + " " + self.getPlural(hundreds, "Hundred")
-        print(". hundreds: " + str(hundreds))
-        print(". numStr: '" + str(numStr) + "'")
         leftOver = numLess1000 - hundreds * 100
-        print(". leftOver: " + str(leftOver))
-        print(". numStr: '" + str(numStr) + "'")
         if leftOver > 0:
             numStr += " " if len(numStr) > 0 else ""
             numStr += self.fromOneToNineteen(leftOver) if leftOver < 20 else self.fromTwentyToNinety(leftOver)
