@@ -3,6 +3,8 @@ class Solution(object):
     TEEN = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
     TIES = ["Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
     
+    DIVIDERS = {1000000000: "Billion", 1000000: "Million", 1000: "Thousand"}
+
     def numberToWords(self, num):
         # max int = 4_294_967_296
         # 1. Transfer num to int
@@ -19,20 +21,11 @@ class Solution(object):
             return "Zero"
 
         numStr = ""
-        billions = intNum // 1000000000
-        if billions > 0:
-            numStr = self.getStrRepresentation(billions, "Billion")
-            intNum -= billions * 1000000000
-
-        millions = intNum // 1000000
-        if millions > 0:
-            numStr = self.addPart(numStr, self.getStrRepresentation(millions, "Million"))
-            intNum -= millions * 1000000
-
-        thousands = intNum // 1000
-        if thousands > 0:
-            numStr = self.addPart(numStr, self.getStrRepresentation(thousands, "Thousand"))
-            intNum -= thousands * 1000
+        for div, name in Solution.DIVIDERS.items():
+            ions = intNum // div
+            if (ions > 0):
+                numStr = self.addPart(numStr, self.getStrRepresentation(ions, name))
+                intNum -= ions * div                
 
         if intNum > 0:
             numStr = self.addPart(numStr, self.getStrRepresentation(intNum, ""))
