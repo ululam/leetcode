@@ -1,5 +1,6 @@
 class Solution(object):
     ONE_DIGIT = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
+    TEEN = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
 
     def numberToWords(self, num):
         # max int = 4_294_967_296
@@ -54,31 +55,10 @@ class Solution(object):
         raise Exception("Number beyond range: " + str(num))
 
     def fromTenToNineteen(self, num):
-        if num == 10:
-            return "Ten"
-        if num == 11:
-            return "Eleven"
-        if num == 12:
-            return "Twelve"
-        if num == 13:
-            return "Thirteen"
-        if num == 14:
-            return "Fourteen"
-        if num == 15:
-            return "Fifteen"
-        if num == 16:
-            return "Sixteen"
-        if num == 17:
-            return "Seventeen"
-        if num == 18:
-            return "Eighteen"
-        if num == 19:
-            return "Nineteen"
-        raise Exception("Number beyond range: " + str(num))
+        return Solution.TEEN[num-10]
 
     def fromOneToNine(self, num):
         return Solution.ONE_DIGIT[num-1]
-        # raise Exception("Number beyond range: " + str(num))
 
     def fromOneToNineteen(self, num):
         return self.fromOneToNine(num) if num < 10 else self.fromTenToNineteen(num)
