@@ -19,14 +19,14 @@ class Solution(object):
             return "Zero"
 
         numStr = ""
-        billions = intNum / 1000000000
+        billions = intNum // 1000000000
 
         numStr += "" if billions == 0 else self.getStrRepresentation(billions, "Billion")
         
-        millions = (intNum - billions * 1000000000) / 1000000
+        millions = (intNum - billions * 1000000000) // 1000000
         numStr += "" if millions == 0 else " " + self.getStrRepresentation(millions, "Million")
 
-        thousands = (intNum - billions * 1000000000 - millions * 1000000) / 1000
+        thousands = (intNum - billions * 1000000000 - millions * 1000000) // 1000
         numStr += "" if thousands == 0 else " " + self.getStrRepresentation(thousands, "Thousand")
 
         leftOver = intNum - billions * 1000000000 - millions * 1000000 - thousands * 1000
@@ -35,7 +35,7 @@ class Solution(object):
         return numStr.strip()
 
     def fromTwentyToNinety(self, num):
-        decims = num / 10
+        decims = num // 10   # We know its > 0
         leftOVer = num - decims * 10
         leftOVer = "" if leftOVer == 0 else " " + self.fromOneToNine(leftOVer)
         return Solution.TIES[decims-2] + leftOVer
@@ -54,7 +54,7 @@ class Solution(object):
         if numLess1000 == 0:
             return numStr
 
-        hundreds = numLess1000 / 100
+        hundreds = numLess1000 // 100
         numStr += "" if hundreds == 0 else self.fromOneToNine(hundreds) + " Hundred"
         leftOver = numLess1000 - hundreds * 100
         if leftOver > 0:
