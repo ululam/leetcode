@@ -22,7 +22,7 @@ class Solution:
         if len(s) < 2:
             return len(s)
 
-        poses = {}
+        poses = [-1] * 128
         currentSubstringStart = 0
         maxLenSeen = 0;
         # s = dvdf
@@ -31,14 +31,16 @@ class Solution:
         # d: i = 0, d -> 0              css = 0     ml = 0
         # v: i = 1, d -> 0, v -> 1      css = 0     ml = 0
         # d: i = 2, d -> 2, v -> 1      css = 1     ml = 2
-        # f:    
+        # f: i = 3, d -> 2, v -> 1,f->3   
+        # end of cycle: ssl = 3 -> ml = 3
         for i in range(0, len(s)):                  
-            prevPos = poses.get(s[i], -1)
+            charOrd = ord(s[i])
+            prevPos = poses[charOrd]
             if prevPos >= currentSubstringStart:
                 subStrLen = i - currentSubstringStart
                 maxLenSeen = maxLenSeen if maxLenSeen > subStrLen else subStrLen
                 currentSubstringStart = prevPos + 1
-            poses[s[i]] = i
+            poses[charOrd] = i
 
         subStrLen = len(s) - currentSubstringStart
         maxLenSeen = maxLenSeen if maxLenSeen > subStrLen else subStrLen
