@@ -10,9 +10,12 @@ class Solution(object):
         self.lac = None
 
     def lowestCommonAncestor(self, root, p, q):
+        return self.lowestCommonAncestorRecursive(root, p, q)
+    
+
+    def lowestCommonAncestorRecursive(self, root, p, q):
         self.recurseTree(root, p, q)
         return self.lac
-    
 
     def recurseTree(self, node, p, q):
         if not node:
