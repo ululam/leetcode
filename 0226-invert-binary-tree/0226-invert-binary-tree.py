@@ -6,7 +6,8 @@
 #         self.right = right
 class Solution(object):
     def invertTree(self, root):
-        return self.invertTreeRecursively(root)
+        # return self.invertTreeRecursively(root)
+        return self.invertTreeIteratively(root)
         
     # [1,2,3] => [1, 3, 2]
     # [1,2,3,4,5,6] => [1, 3, 2, 6, 5, 4]
@@ -21,4 +22,24 @@ class Solution(object):
         return root
 
     def invertTreeIteratively(self, root):
-        pass
+        # We create a list (or a queue) of elements
+        # First, we add root there
+        # We run a cycle and take a first element of a queue
+        # We swap it's children
+        # If left child is not null, we add it to the queue
+        # Same for the right
+        from queue import Queue
+        q = Queue()
+        q.put(root)
+        while q.qsize() > 0:
+            node = q.get()
+            if not node:
+                break
+            node.left, node.right = node.right, node.left
+            if node.left:
+                q.put(node.left)
+            if node.right:
+                q.put(node.right)
+        
+        return root
+
