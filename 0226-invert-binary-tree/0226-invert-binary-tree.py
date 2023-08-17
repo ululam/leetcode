@@ -28,13 +28,13 @@ class Solution(object):
         # We swap it's children
         # If left child is not null, we add it to the queue
         # Same for the right
+        if not root:
+            return root
         from collections import deque
         q = deque()
         q.append(root)
         while len(q) > 0:
             node = q.popleft()
-            if not node:
-                break
             node.left, node.right = node.right, node.left
             if node.left:
                 q.append(node.left)
