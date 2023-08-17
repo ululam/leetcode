@@ -31,7 +31,7 @@ class Solution(object):
         from queue import Queue
         q = Queue()
         q.put(root)
-        while q.qsize() > 0:
+        while not q.empty():
             node = q.get()
             if not node:
                 break
