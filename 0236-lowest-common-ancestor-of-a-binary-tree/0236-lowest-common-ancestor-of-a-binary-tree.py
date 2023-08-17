@@ -18,9 +18,6 @@ class Solution(object):
         if not node:
             return False
 
-        if self.lac is not None:
-            return False
-
         left = self.recurseTree(node.left, p, q)
         right = self.recurseTree(node.right, p, q)
 
