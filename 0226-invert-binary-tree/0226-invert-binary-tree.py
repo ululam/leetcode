@@ -28,18 +28,18 @@ class Solution(object):
         # We swap it's children
         # If left child is not null, we add it to the queue
         # Same for the right
-        from queue import Queue
-        q = Queue()
-        q.put(root)
-        while not q.empty():
-            node = q.get()
+        from collections import deque
+        q = deque()
+        q.append(root)
+        while len(q) > 0:
+            node = q.popleft()
             if not node:
                 break
             node.left, node.right = node.right, node.left
             if node.left:
-                q.put(node.left)
+                q.append(node.left)
             if node.right:
-                q.put(node.right)
+                q.append(node.right)
         
         return root
 
