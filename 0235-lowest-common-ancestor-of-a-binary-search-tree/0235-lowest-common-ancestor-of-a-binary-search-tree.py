@@ -7,6 +7,9 @@
 
 class Solution(object):
     def lowestCommonAncestor(self, root, p, q):
+        return self.lowestCommonAncestorIter(root, p, q)
+
+    def lowestCommonAncestorRec(self, root, p, q):
         # Traverse the tree
         # If current node << p,q => treverse node.left
         # If current node >> p,q => treverse node.right
@@ -18,3 +21,14 @@ class Solution(object):
             return self.lowestCommonAncestor(root.left, p, q)
 
         return root
+
+    def lowestCommonAncestorIter(self, root, p, q):
+        node = root
+
+        while node:
+            if p.val > node.val and q.val > node.val:
+                node = node.right
+            elif p.val < node.val and q.val < node.val:
+                node = node.left
+            else:
+                return node
