@@ -34,10 +34,6 @@ class Solution(object):
                 nodeMap[node.right] = node
                 que.append(node.right)
 
-        # print("p: " + str(pNode))
-        # print("q: " + str(qNode))
-        # print(nodeMap)
-
         pTree = set()
         while pNode:
             pTree.add(pNode)
