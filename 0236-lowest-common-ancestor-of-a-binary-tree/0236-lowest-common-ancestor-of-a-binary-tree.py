@@ -10,8 +10,47 @@ class Solution(object):
         self.lac = None
 
     def lowestCommonAncestor(self, root, p, q):
-        return self.lowestCommonAncestorRecursive(root, p, q)
+        # return self.lowestCommonAncestorRecursive(root, p, q)
+        return self.lowestCommonAncestorIterative(root, p, q)
     
+
+    def lowestCommonAncestorIterative(self, root, p, q):
+        from collections import deque
+        pNode, qNode = None, None
+        que = deque()
+        que.append(root)
+        nodeMap = {}
+
+        while pNode is None or qNode is None:
+            node = que.popleft()
+            if node == p:
+                pNode = node
+            elif node == q:
+                qNode = node
+            if node.left:
+                nodeMap[node.left] = node
+                que.append(node.left)
+            if node.right:
+                nodeMap[node.right] = node
+                que.append(node.right)
+
+        # print("p: " + str(pNode))
+        # print("q: " + str(qNode))
+        # print(nodeMap)
+
+        pTree = set()
+        while pNode:
+            pTree.add(pNode)
+            pNode = nodeMap.get(pNode)
+        
+        lac = None
+        while not lac and qNode:
+            if qNode in pTree:
+                lac = qNode
+            qNode = nodeMap.get(qNode)
+        return lac
+
+        
 
     def lowestCommonAncestorRecursive(self, root, p, q):
         self.recurseTree(root, p, q)
