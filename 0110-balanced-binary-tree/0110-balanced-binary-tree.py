@@ -30,8 +30,6 @@ class Solution(object):
         if not size:
             size = max(self.ln(node.left), self.ln(node.right)) + 1
             self.sizes[node] = size
-        else:
-            print("Size is found in map")
 
         return size;
 
