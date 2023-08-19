@@ -9,6 +9,10 @@ class Solution(object):
         self.sizes = {}
 
     def isBalanced(self, root):
+        # return self.isBalancedTopDown(root)
+        return self.isBalancedBottomUp(root)[0]
+
+    def isBalancedTopDown(self, root):
         # Tree is balanced if:
         # - abs(len(left) - len(right)) <= 1
         # - left is balanced
@@ -33,3 +37,15 @@ class Solution(object):
 
         return size;
 
+    def isBalancedBottomUp(self, root):
+        if not root:
+            return True, 0
+
+        leftBalanced, leftH = self.isBalancedBottomUp(root.left)
+        if not leftBalanced:
+            return False, 0
+        rightBalanced, rightH = self.isBalancedBottomUp(root.right)
+        if not rightBalanced:
+            return False, 0
+
+        return abs(leftH - rightH) < 2, max(leftH, rightH) + 1
