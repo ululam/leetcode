@@ -11,9 +11,12 @@ class MyQueue(object):
     def __init__(self):
         self.stack = list()
         self.queue = list()
+        self.top = None
         
 
     def push(self, x):
+        if len(self.stack) == 0:
+            self.top = x
         self.stack.insert(0, x)
 
     def pop(self):
@@ -23,14 +26,13 @@ class MyQueue(object):
         
 
     def peek(self):
-        if len(self.queue) == 0:
-            self._move()
-        return self.queue[0]
+        if len(self.queue) > 0:
+            return self.queue[0]
+        return self.top
 
     def _move(self):
         while len(self.stack) > 0:
             self.queue.insert(0, self.stack.pop(0))
-
 
     def empty(self):
         return len(self.queue) + len(self.stack) == 0 
