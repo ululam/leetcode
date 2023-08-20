@@ -14,14 +14,11 @@ class MyQueue(object):
         
 
     def push(self, x):
-        for el in self.main:
-            self.temp.insert(0, el)
-        del self.main[:]
+        while(len(self.main) > 0):
+            self.temp.insert(0, self.pop())
         self.main.append(x)
-        for el in self.temp:
-            self.main.insert(0, el)
-        del self.temp[:]
-        
+        while(len(self.temp) > 0):
+            self.main.insert(0, self.temp.pop(0))        
 
     def pop(self):
         return self.main.pop(0)
