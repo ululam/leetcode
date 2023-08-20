@@ -9,26 +9,31 @@ class MyQueue(object):
     # pop => return from the s3 and remove (pop)
     # size => size of s2
     def __init__(self):
-        self.main = list()
-        self.temp = list()
+        self.stack = list()
+        self.queue = list()
         
 
     def push(self, x):
-        while(len(self.main) > 0):
-            self.temp.insert(0, self.pop())
-        self.main.append(x)
-        while(len(self.temp) > 0):
-            self.main.insert(0, self.temp.pop(0))        
+        self.stack.insert(0, x)
 
     def pop(self):
-        return self.main.pop(0)
+        if len(self.queue) == 0:
+            self._move()
+        return self.queue.pop(0)
         
 
     def peek(self):
-        return self.main[0]        
+        if len(self.queue) == 0:
+            self._move()
+        return self.queue[0]
+
+    def _move(self):
+        while len(self.stack) > 0:
+            self.queue.insert(0, self.stack.pop(0))
+
 
     def empty(self):
-        return len(self.main) == 0
+        return len(self.queue) + len(self.stack) == 0 
         
 
 
