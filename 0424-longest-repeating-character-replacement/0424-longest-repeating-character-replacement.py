@@ -16,8 +16,8 @@ class Solution(object):
                 # counters[ord(s[l])-shift] -= 1
                 counters[s[l]] -= 1
                 l += 1
-            else:
-                res = max(res, windowLen)
+                continue
+            res = max(res, windowLen)
         return res
 
 
