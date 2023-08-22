@@ -16,7 +16,7 @@ class Solution(object):
         
         return steps
 
-    def climbStairs(self, n):
+    def climbStairsFib(self, n):
         if n < 3:
             return n
         prev1 = 1
@@ -27,3 +27,10 @@ class Solution(object):
             prev1 = prev2
             prev2 = res
         return res
+
+    def climbStairs(self, n):
+        sqrt5 = 5 ** 0.5
+        a = (1 + sqrt5)/2
+        b = (1 - sqrt5)/2
+
+        return int( (a ** (n+1) - b ** (n+1)) / sqrt5 )
