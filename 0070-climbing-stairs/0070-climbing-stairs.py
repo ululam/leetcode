@@ -19,9 +19,11 @@ class Solution(object):
     def climbStairs(self, n):
         if n < 3:
             return n
-        steps = [0] * (n+1)
-        steps[1] = 1
-        steps[2] = 2
+        prev1 = 1
+        prev2 = 2
+        res = 0
         for i in range (3, n+1):
-            steps[i] = steps[i-1] + steps[i-2]
-        return steps[n]
+            res = prev1 + prev2
+            prev1 = prev2
+            prev2 = res
+        return res
