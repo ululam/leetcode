@@ -6,7 +6,7 @@ class Solution(object):
     def __init__(self):
         self.staircase = {}
 
-    def climbStairs(self, n):
+    def climbStairsMemo(self, n):
         if n < 3:
             return n
         steps = self.staircase.get(n)
@@ -16,4 +16,12 @@ class Solution(object):
         
         return steps
 
-
+    def climbStairs(self, n):
+        if n < 3:
+            return n
+        steps = [0] * (n+1)
+        steps[1] = 1
+        steps[2] = 2
+        for i in range (3, n+1):
+            steps[i] = steps[i-1] + steps[i-2]
+        return steps[n]
