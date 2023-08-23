@@ -7,7 +7,7 @@ class Solution(object):
     def firstBadVersion(self, n):
         # ----- | ----
         # 
-        left, right, current = 0, n, 0
+        left, right, current = 1, n, 0
         while left <= right:
             current = left + ((right - left) >> 1)
             isBad = isBadVersion(current)
