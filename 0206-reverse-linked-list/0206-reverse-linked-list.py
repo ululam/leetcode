@@ -15,6 +15,7 @@ class Solution(object):
         
         # current = head
         # nextNode = head.next
+        # head.next = None
 
         # while nextNode:
         # nextNextNode = nextNode.next. (2)
@@ -24,15 +25,14 @@ class Solution(object):
         if not head or not head.next:
             return head
         # [1,2,3,4,5]
-        first = head  # 1
-        second = head.next
-        head.next = None
-        while second:
-            third = second.next    # 5
-            second.next = first         # 4 -> 3 -> 2 -> 1
-            first = second              # 4
-            second = third         # 5
-        return first
+        prev = None
+        current = head  # 1
+        while current:
+            nextNode = current.next    # 5
+            current.next = prev         # 4 -> 3 -> 2 -> 1
+            prev = current              # 4
+            current = nextNode         # 5
+        return prev
 
 
 
