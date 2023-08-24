@@ -4,7 +4,8 @@ class Solution(object):
         # interate over ransomNote, decrease count in the hashmap for given char
         # if count < 0, return False
         # if we reached the end of the ransom note, return True
-
+        if len(ransomNote) > len(magazine):
+            return False
         # rn = abcc, magagine = abcabc
         letterCounts = [0] * 26
         shift = ord('a')
