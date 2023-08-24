@@ -20,6 +20,8 @@ class Solution(object):
             if candidateCount == 0:
                candidate = nums[i] 
             candidateCount += 1 if nums[i] == candidate else -1
+            if candidateCount > len(nums) >> 1:
+                break
 
         return candidate
 
