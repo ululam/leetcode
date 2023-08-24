@@ -1,5 +1,5 @@
 class Solution(object):
-    def majorityElementOnMem(self, nums):
+    def majorityElement(self, nums):
         # [1,2,3,4,4,4,4] => 4
         # [1] => 1
         # [1,2,1] => 1
@@ -13,7 +13,7 @@ class Solution(object):
             counts[n] = nCount
         return -1
 
-    def majorityElement(self, nums):
+    def majorityElementO1Mem(self, nums):
         candidate = None
         candidateCount, othersCount = 0,0
         for i in range(0, len(nums)):
