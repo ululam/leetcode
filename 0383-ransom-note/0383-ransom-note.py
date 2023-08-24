@@ -6,14 +6,16 @@ class Solution(object):
         # if we reached the end of the ransom note, return True
 
         # rn = abcc, magagine = abcabc
-        letterCounts = {}
+        letterCounts = [0] * 26
+        shift = ord('a')
         for c in magazine:
-            letterCounts[c] = 1 + letterCounts.get(c, 0) # a -> 2, b -> 2, c -> 2
-        for c in ransomNote:                            # a
-            count = letterCounts.get(c, 0) - 1          # 0
-            if count < 0:                               # false
+            cIndex = ord(c) - shift
+            letterCounts[cIndex] += 1
+        for c in ransomNote:   
+            cIndex = ord(c) - shift                         # a
+            letterCounts[cIndex] -=1
+            if letterCounts[cIndex] < 0:                               # false
                 return False
-            letterCounts[c] = count                     # 0
         return True
 
 
