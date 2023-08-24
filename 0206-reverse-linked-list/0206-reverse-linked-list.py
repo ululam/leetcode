@@ -22,8 +22,6 @@ class Solution(object):
         # nextNode.next = current       (1->0)
         # current = nextNode            (1)
         # nextNode = nextNextNode       (2)
-        if not head or not head.next:
-            return head
         # [1,2,3,4,5]
         prev = None
         current = head  # 1
