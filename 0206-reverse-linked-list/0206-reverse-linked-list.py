@@ -4,7 +4,7 @@
 #         self.val = val
 #         self.next = next
 class Solution(object):
-    def reverseListIter(self, head):
+    def reverseList(self, head):
         # 0 -> 1 -> 2
         # *    *    *
         # 0 <- [1    2 -> 3] -> 4
@@ -32,7 +32,7 @@ class Solution(object):
             current = nextNode         # 5
         return prev
 
-    def reverseList(self, head):
+    def reverseListRec(self, head):
         if not head or not head.next:
             return head
         res = self.reverseList(head.next)
