@@ -24,6 +24,8 @@ class Solution(object):
             else:
                 othersCount += 1
                 if candidateCount == othersCount:
+                    candidateCount = 0
+                    othersCount = 0
                     candidate = None
 
 
