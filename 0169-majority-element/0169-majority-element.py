@@ -15,21 +15,11 @@ class Solution(object):
 
     def majorityElement(self, nums):
         candidate = None
-        candidateCount, othersCount = 0,0
+        candidateCount = 0
         for i in range(0, len(nums)):
-            if not candidate:
+            if candidateCount == 0:
                candidate = nums[i] 
-            if nums[i] == candidate:
-                candidateCount += 1
-                if candidateCount > len(nums) >> 1:
-                    return candidate
-            else:
-                othersCount += 1
-                if candidateCount == othersCount:
-                    candidateCount = 0
-                    othersCount = 0
-                    candidate = None
-
+            candidateCount += 1 if nums[i] == candidate else -1
 
         return candidate
 
