@@ -14,7 +14,7 @@ class Solution:
         self.path = []
         self.walk(root)
 
-        print (" -> ".join([str(n.val) for n in self.path]))
+        # print (" -> ".join([str(n.val) for n in self.path]))
 
         return self.d
 
