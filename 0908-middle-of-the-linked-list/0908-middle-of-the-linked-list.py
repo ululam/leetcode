@@ -5,11 +5,8 @@
 #         self.next = next
 class Solution(object):
     def middleNode(self, head):
-        nodes = list()
-        n = head
-        while n:
-            nodes.append(n)
-            n = n.next
-        pos = len(nodes) >> 1 
-
-        return nodes[pos]
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
