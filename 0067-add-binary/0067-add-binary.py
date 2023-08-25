@@ -11,10 +11,8 @@ class Solution(object):
         transfer = 0
         res = ""
         for i in range (len(bigS)-1, -1, -1):
-            print("i = " + str(i))
             c1 = int(bigS[i])
             c2 = int(smallS[i-delta]) if i-delta >= 0 else 0
-            print(str(c1) + ", " + str(c2))
             summ = c1 + c2 + transfer
             if summ == 0:
                 res = '0' + res
