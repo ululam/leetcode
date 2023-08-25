@@ -1,29 +1,35 @@
 # Definition for a binary tree node.
-# class TreeNode(object):
+# class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution(object):
-    def diameterOfBinaryTree(self, root):
-        return self.dRec(root)[0]
+class Solution:
+    def __init__(self):
+        self.path = None
+        self.d = None
 
-    def dRec(self, root):
-        if not root:
-            return 0,0
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        self.d = 0
+        self.path = []
+        self.walk(root)
 
-        dLeft, rLeft = self.dRec(root.left)
-        dRight, rRight = self.dRec(root.right)
-        maxD = max(dLeft, dRight)
-        maxD = max(rLeft + rRight, maxD)
+        print (" -> ".join([str(n.val) for n in self.path]))
 
-        return maxD, max(rLeft, rRight) + 1
+        return self.d
 
-    
-    def dIter(self, root):
-        pass
+    # Returns tuple: radius of the node, path of that radius
+    def walk(self, node:TreeNode) -> (int, list):
+        if not node:
+            return 0, []
+        leftR, leftPath = self.walk(node.left) 
+        rightR, rightPath = self.walk(node.right)
 
-        # we need to iterate over the tree, either recursively or iteratively
-        # for each node, we need to calculate its D = Rl + Rr and R = max(Rl, Rr)
-        # we store Dmax in var
-        #
+        if self.d < leftR + rightR:
+            self.d = leftR + rightR
+            self.path = leftPath + [node] + rightPath
+
+        if leftR > rightR:
+            return 1 + leftR, leftPath + [node]
+        return 1 + rightR, rightPath + [node]
+         
