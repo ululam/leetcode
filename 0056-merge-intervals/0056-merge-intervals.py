@@ -14,9 +14,9 @@ class Solution:
             if a1[1] < a2[0]: 
                 res += [a1]
                 a1 = a2
-                continue
-            a1[0] = min(a1[0], a2[0])
-            a1[1] = max(a1[1], a2[1])
+            else:
+                a1[0] = min(a1[0], a2[0])
+                a1[1] = max(a1[1], a2[1])
         return res + [a1]
     
     
