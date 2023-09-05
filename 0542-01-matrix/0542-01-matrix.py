@@ -2,6 +2,12 @@ from collections import deque
 
 class Solution:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        return self.updateMatrixBFS(mat)
+
+    def updateMatrixDP(self, mat: List[List[int]]) -> List[List[int]]:
+        pass
+
+    def updateMatrixBFS(self, mat: List[List[int]]) -> List[List[int]]:
         # The idea is to BFS: if we calculated distances from each 0 simultanuesly, 
         # we will arrive to the correct numbers (not true for DFS, obviously)
 
@@ -20,7 +26,7 @@ class Solution:
 
         directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
     
-        while len(queue) > 0:
+        while queue:
             row, col, distance = queue.popleft()
 
             for dx, dy in directions:
