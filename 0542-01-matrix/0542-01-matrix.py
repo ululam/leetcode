@@ -8,18 +8,15 @@ class Solution:
         def valid(row, col):
             return 0 <= row < m and 0 <= col < n
 
-        # matrix = [[-1 if c != 0 else 0 for c in row] for row in mat]
-        matrix = [row[:] for row in mat]
+        matrix = [[-1 if c != 0 else 0 for c in row] for row in mat]
         queue = deque()
         m = len(mat)
         n = len(mat[0])
-        visited = set()
 
         for i in range(m):
             for j in range(n):
                 if mat[i][j] == 0:
                     queue.append((i, j, 0))
-                    visited.add((i, j))
 
         directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
     
@@ -28,9 +25,8 @@ class Solution:
 
             for dx, dy in directions:
                 next_row, next_col = row + dy, col + dx
-                if valid(next_row, next_col) and (next_row, next_col) not in visited:
+                if valid(next_row, next_col) and matrix[next_row][next_col] == -1:
                     matrix[next_row][next_col] = distance + 1
                     queue.append((next_row, next_col, distance + 1))
-                    visited.add((next_row, next_col))
 
         return matrix
