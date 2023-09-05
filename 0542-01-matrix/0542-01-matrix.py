@@ -6,13 +6,15 @@ class Solution:
         # we will arrive to the correct numbers (not true for DFS, obviously)
 
         def valid(row, col):
-            return 0 <= row < len(mat) and 0 <= col < len(mat[row])
+            return 0 <= row < m and 0 <= col < n
 
         matrix = [[-1 if c != 0 else 0 for c in row] for row in mat]
         queue = deque()
+        m = len(mat)
+        n = len(mat[0])
 
-        for i in range(len(mat)):
-            for j in range(len(mat[i])):
+        for i in range(m):
+            for j in range(n):
                 if mat[i][j] == 0:
                     queue.append((i, j, 0))
 
