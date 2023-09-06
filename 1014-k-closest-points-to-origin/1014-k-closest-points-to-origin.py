@@ -10,18 +10,4 @@ class Solution:
         if k == len(points):
             return points
 
-        distances = defaultdict(list)
-        for p in points:
-            distances[p[0]*p[0] + p[1]*p[1]].append(p)    
-
-        sorted_distances = sorted([k for k in distances.keys()])
-
-        res = []
-        # Get lists and join elememt
-        for d in sorted_distances:
-            points_list = distances[d]
-            for p in points_list:
-                res.append(p)
-                if len(res) == k:
-                    return res 
-        
+        return sorted(points, key = lambda p: p[0]**2 + p[1]**2)[:k]
