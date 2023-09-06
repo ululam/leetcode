@@ -46,13 +46,11 @@ class Solution:
             for col in range(n):
                 if matrix[row][col] == 0:
                     continue
-                min_neighbour = maxValue
+                matrix[row][col] = maxValue
                 if row > 0:
-                    min_neighbour = min(min_neighbour, matrix[row-1][col])
+                    matrix[row][col] = min(matrix[row][col], 1 + matrix[row-1][col])
                 if col > 0:
-                    min_neighbour = min(min_neighbour, matrix[row][col-1])
-                matrix[row][col] = 1 + min_neighbour
-                print(f"matrix[{row}][{col}]: {matrix[row][col]}")
+                    matrix[row][col] = min(matrix[row][col], 1 + matrix[row][col-1])
 
         print(f"{matrix}")
 
@@ -62,12 +60,9 @@ class Solution:
             for col in range(n-1, -1, -1):
                 if matrix[row][col] == 0:
                     continue
-                min_neighbour = maxValue
                 if row < m-1:
-                    min_neighbour = min(min_neighbour, matrix[row+1][col])
+                    matrix[row][col] = min(matrix[row][col], 1 + matrix[row+1][col])
                 if col < n-1:
-                    min_neighbour = min(min_neighbour, matrix[row][col+1])
-                matrix[row][col] = min(matrix[row][col], 1 + min_neighbour)
-                print(f"matrix[{row}][{col}]: {matrix[row][col]}")
+                    matrix[row][col] = min(matrix[row][col], 1 + matrix[row][col+1])
 
         return matrix
