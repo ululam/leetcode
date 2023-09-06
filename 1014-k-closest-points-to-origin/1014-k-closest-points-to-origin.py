@@ -10,4 +10,12 @@ class Solution:
         if k == len(points):
             return points
 
-        return sorted(points, key = lambda p: p[0]**2 + p[1]**2)[:k]
+        # return sorted(points, key = lambda p: p[0]**2 + p[1]**2)[:k]
+        D = [] #heap for storing tuple (distance, point)
+        for pt in points:
+            x, y = pt[0], pt[1]
+            d = x * x + y * y
+            heapq.heappush(D, (-d, pt))
+            if len(D) > k:
+                heapq.heappop(D)
+        return [pt for (d, pt) in D]        
