@@ -7,8 +7,8 @@ class Solution:
         # sort
         # return first k
         # O(nlogn), n = len(points)
-        if k == len(points):
-            return points
+        # if k == len(points):
+        #     return points
 
         # return sorted(points, key = lambda p: p[0]**2 + p[1]**2)[:k]
         D = [] #heap for storing tuple (distance, point)
