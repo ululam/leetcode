@@ -22,7 +22,7 @@ class Solution:
             res = self.operations[t](x, y)
             tokens[pos] = res
             token.pop(pos-1)
-            token.pop(pos-2)
+            token.pop(pos-1)
             pos -=1
 
         return int(tokens[0])
