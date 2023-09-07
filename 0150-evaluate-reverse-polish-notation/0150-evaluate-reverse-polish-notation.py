@@ -21,7 +21,7 @@ class Solution:
             y = int(tokens[pos-1])
             res = self.operations[tokens[pos]](x, y)
             tokens[pos] = res
-            tokens.pop(pos-2)
+            tokens.pop(pos-1)
             tokens.pop(pos-2)
             pos -=1
 
