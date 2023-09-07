@@ -35,7 +35,6 @@ class Solution:
                 x = int(node.prev.prev.val)
                 y = int(node.prev.val)
                 res = self.operations[node.val](x, y)
-                print(f"x,y,t, res = {x}, {y}, {t}, {res}")
                 currentNode = node.prev.prev
                 currentNode.val = res
                 currentNode.next = node.next
