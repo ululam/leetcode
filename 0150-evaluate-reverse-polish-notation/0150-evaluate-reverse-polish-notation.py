@@ -8,7 +8,7 @@ class Solution:
         }
         
     def evalRPN(self, tokens: List[str]) -> int:
-        return self.evalViaStack(tokens)
+        return self.evalInPlace(tokens)
 
     def evalInPlace(self, tokens: List[str]) -> int:
         # Go through list, apply operations in place, replacing (a,b,operations) triple with its result
@@ -19,10 +19,10 @@ class Solution:
                 continue
             x = int(tokens[pos-2])
             y = int(tokens[pos-1])
-            res = self.operations[t](x, y)
+            res = self.operations[tokens[pos]](x, y)
             tokens[pos] = res
-            token.pop(pos)
-            token.pop(pos)
+            tokens.pop(pos-2)
+            tokens.pop(pos-2)
             pos -=1
 
         return int(tokens[0])
