@@ -11,19 +11,19 @@ class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
             return root
-        allLevels = [[root]] + self.nextLevel([root])
-        res = []
-        for level in allLevels:
-            res += [[n.val for n in level]]
+        levels = [[root.val]]
+        self.walkLevel([root], levels)
+        return levels
 
-        return res
-
-    def nextLevel(self, nodes: List[TreeNode]):
-        nextL = []
+    def walkLevel(self, nodes: List[TreeNode], levels: List[List[int]]):
+        nextLNodes = []
         for n in nodes:
             if n:
                 if n.left:
-                    nextL.append(n.left)
+                    nextLNodes.append(n.left)
                 if n.right:
-                    nextL.append(n.right)
-        return [nextL] + self.nextLevel(nextL) if nextL else []
+                    nextLNodes.append(n.right)
+        if nextLNodes:
+            levels += [[n.val for n in nextLNodes]]
+            self.walkLevel(nextLNodes, levels) 
+    # return [nextL] + self.walkLevel(nextL) if nextL else []
