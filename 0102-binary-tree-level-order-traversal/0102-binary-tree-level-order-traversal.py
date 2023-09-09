@@ -19,8 +19,8 @@ class Solution:
     
     def traverse(self, node, levels, depth):
         if len(levels) == depth:
-            levels.append([])
-        levels[depth].append(node.val)
+            levels += [[]]
+        levels[depth] += [node.val]
         if node.left:
             self.traverse(node.left, levels, 1 + depth)
         if node.right:
