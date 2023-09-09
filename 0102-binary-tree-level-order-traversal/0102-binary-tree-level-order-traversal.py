@@ -8,9 +8,31 @@ class Solution:
     # We should go down level by level
     # At each level build a list of nodes, add to the result collection
     # and recursively call the same method, passing current level colletion
-
-
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return root
+        queue = deque()
+        level = 0
+        queue.append(root)
+        currentLevelSize = len(queue)
+        levels = [[]]
+        while queue:
+            if currentLevelSize == 0:
+                currentLevelSize = len(queue)
+                level += 1
+                levels.append([])
+            node = queue.popleft()
+            levels[level].append(node.val)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+            currentLevelSize -= 1
+        return levels
+
+
+    # Why its BSF? Its DFS
+    def levelOrderBFS(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
             return root
         levels = []
@@ -26,7 +48,8 @@ class Solution:
         if node.right:
             self.traverse(node.right, levels, 1 + depth)
 
-    def levelOrder2(self, root: Optional[TreeNode]) -> List[List[int]]:
+    # My initial solution
+    def levelOrderMyInitialAndItsOK(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
             return root
         levels = [[root.val]]
