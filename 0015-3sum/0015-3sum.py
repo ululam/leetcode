@@ -1,5 +1,24 @@
 class Solution:
+
     def threeSum(self, nums: List[int]) -> List[List[int]]:
+        #self.threeSumSorted(nums)
+        return self.threeSumUnsorted(nums)
+
+    def threeSumUnsorted(self, nums: List[int]) -> List[List[int]]:
+        res, duplicates = set(), set()
+        seen = {}
+        for i, val in enumerate(nums):
+            if val not in duplicates:
+                duplicates.add(val)
+                for j, valj in enumerate(nums[i+1:]):
+                    summa = - (val + valj)
+                    if seen.get(summa) == i: # We saw that value in the current extermal loop
+                        res.add(tuple(sorted((val, valj, summa))))
+                    seen[valj] = i
+        return res
+
+
+    def threeSumSorted(self, nums: List[int]) -> List[List[int]]:
         res = []
         nums.sort()
 
