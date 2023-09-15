@@ -11,16 +11,18 @@ class Solution:
         return res
 
     def twoSum(self, nums, i, res):
-        k,K = i+1, len(nums) - 1
-        while k < K:
-            summa = nums[k] + nums[K]
-            if summa < -nums[i]:
-                k += 1
-            elif summa > -nums[i]:
-                K -= 1
+        n = nums[i]
+        lo, hi = i+1, len(nums)-1
+        while lo < hi:
+            summa = nums[lo] + nums[hi]
+            if summa < -n:
+                lo += 1
+            elif summa > -n:
+                hi -= 1
             else:
-                res.append([nums[i], nums[k], nums[K]])
-                k += 1
-                K -= 1
-                while nums[k-1] == nums[k] and k < K:
-                    k += 1
+                res += [[n, nums[lo], nums[hi]]]
+                lo += 1
+                hi -= 1
+                while lo < hi and nums[lo-1] == nums[lo]:
+                    lo += 1
+
