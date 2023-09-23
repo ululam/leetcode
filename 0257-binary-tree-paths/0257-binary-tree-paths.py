@@ -6,6 +6,9 @@
 #         self.right = right
 class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        return self.binaryTreePathsIter(root)
+
+    def binaryTreePathsRec(self, root: Optional[TreeNode]) -> List[str]:
         # Recursively call paths for left and right nodes
         # Append currentPrefix -> left -> [all the left paths]
         # Same for the right
@@ -21,3 +24,17 @@ class Solution:
 
         return res
         
+
+    def binaryTreePathsIter(self, root: Optional[TreeNode]) -> List[str]:
+        res = []
+        stack = [(root, str(root.val))]
+        while stack:
+            node, path = stack.pop()
+            if not node.left and not node.right:
+                res.append(path)
+            if node.left:
+                stack.append((node.left, f"{path}->{node.left.val}"))
+            if node.right:
+                stack.append((node.right, f"{path}->{node.right.val}"))
+        
+        return res
