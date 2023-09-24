@@ -6,7 +6,7 @@
 
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        return self.detectCycleHash(head)
+        return self.detectCycleHash2p(head)
 
     def detectCycleHash(self, head: Optional[ListNode]) -> Optional[ListNode]:
         visited = set()
@@ -19,5 +19,24 @@ class Solution:
         return None
 
     def detectCycleHash2p(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        pass
+        if not head:
+            return None
+
+        t,h = head, head
+        
+        while h and h.next:
+            t = t.next
+            h = h.next.next
+            if t == h:
+                break
+        
+        if not h or not h.next:
+            return None
+        
+        h = head
+        while t != h:
+            t = t.next
+            h = h.next
+        return h
+
         
