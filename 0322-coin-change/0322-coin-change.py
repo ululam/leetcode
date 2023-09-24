@@ -10,12 +10,12 @@ class Solution:
             return -1
         if amount in self.cache:
             return self.cache[amount]
-        num = 100_000
+        num = float('inf')
         for c in coins:
             currNum = self.coinChange(coins, amount - c)
             if currNum != -1 and 1 + currNum < num:
                 num = 1 + currNum
-        num = -1 if num == 100_000 else num
+        num = -1 if num == float('inf') else num
         self.cache[amount] = num
         return num
     
