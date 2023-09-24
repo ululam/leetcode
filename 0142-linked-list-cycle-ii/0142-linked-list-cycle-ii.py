@@ -9,15 +9,12 @@ class Solution:
         return self.detectCycleHash(head)
 
     def detectCycleHash(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head:
-            return None
         visited = set()
-        visited.add(head)
-        while head.next:
-            head = head.next
+        while head:
             if head in visited:
                 return head
             visited.add(head)
+            head = head.next
 
         return None
 
