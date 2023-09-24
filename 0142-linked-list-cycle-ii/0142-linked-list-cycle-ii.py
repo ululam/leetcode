@@ -24,13 +24,15 @@ class Solution:
 
         t,h = head, head
         
+        met = False
         while h and h.next:
             t = t.next
             h = h.next.next
             if t == h:
+                met = True
                 break
         
-        if not h or not h.next:
+        if not met:
             return None
         
         h = head
