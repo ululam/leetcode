@@ -16,11 +16,9 @@ class Trie:
 
 
     def search(self, word: str) -> bool:
-        print(f"Searching {word}")
         node = self.head
         for c in word:
             node = node.next.get(c)
-            print(f"{c} -> {node}")
             if node is None:
                 break
         return node is not None and self.TERMINAL.letter in node.next
