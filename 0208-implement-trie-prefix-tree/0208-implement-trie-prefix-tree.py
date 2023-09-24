@@ -2,14 +2,15 @@ class Trie:
 
     def __init__(self):
         self.head = Node(-2)
+        self.delta = ord('a')
 
     def insert(self, word: str) -> None:
         prev = self.head
         for c in word:
-            node = prev.next.get(c)
+            node = prev.next[ord(c) - self.delta]
             if not node:
                 node = Node(c)
-                prev.next[c] = node
+                prev.next[ord(c) - self.delta] = node
             prev = node
         prev.terminal = True
 
@@ -17,7 +18,7 @@ class Trie:
     def search(self, word: str) -> bool:
         node = self.head
         for c in word:
-            node = node.next.get(c)
+            node = node.next[ord(c) - self.delta]
             if node is None:
                 break
         return node is not None and node.terminal
@@ -25,7 +26,7 @@ class Trie:
     def startsWith(self, prefix: str) -> bool:
         node = self.head
         for c in prefix:
-            node = node.next.get(c)
+            node = node.next[ord(c) - self.delta]
             if node is None:
                 break
         return node is not None
@@ -34,7 +35,7 @@ class Trie:
 class Node:
     def __init__(self, letter):
         self.letter = letter
-        self.next = {}
+        self.next = [None] * 26
         self.terminal = False
 
     def addNext(self, n):
