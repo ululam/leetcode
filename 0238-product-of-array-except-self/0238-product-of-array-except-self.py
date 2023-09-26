@@ -1,7 +1,7 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         if len(nums) < 2:
-            return nu,s
+            return nums
 
         headMults = [0] * len(nums)
         headMults[0] = nums[0]
