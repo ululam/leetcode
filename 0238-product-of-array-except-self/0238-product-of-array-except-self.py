@@ -1,5 +1,20 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
+        return self.productExceptSelfO1(nums)
+
+    def productExceptSelfO1(self, nums: List[int]) -> List[int]:
+        N = len(nums)
+        res = [1]
+        for i in range (1, N):
+            res.append(nums[i-1] * res[i-1])
+        
+        r = 1
+        for i in reversed(range(N)):
+            res[i] = res[i] * r
+            r *= nums[i]
+        return res
+
+    def productExceptSelfON(self, nums: List[int]) -> List[int]:
         if len(nums) < 2:
             return nums
 
