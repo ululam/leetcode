@@ -13,9 +13,6 @@ class Solution:
         for i in range(len(nums) - 2, -1, -1):
             tailMults[i] = tailMults[i+1] * nums[i]
         
-        print(headMults)
-        print(tailMults)
-
         res = []
         res.append(tailMults[1])
         for i in range(1, len(nums)-1):
