@@ -22,12 +22,6 @@ class Node:
         self.next = next
         self.min = min(self.val, next.min) if next else self.val
 
-    
-    def __str__(self):
-        addon = f" -> {self.next}" if self.next else ""
-        return f"[{self.val}]{addon}"
-
-
 # Your MinStack object will be instantiated and called as such:
 # obj = MinStack()
 # obj.push(val)
