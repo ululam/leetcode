@@ -9,14 +9,17 @@ class Solution:
         return self.isValidRec(root, -math.inf, math.inf)
         # return self.isValidIter(root)
 
-    # [1,2,3,4,5] 
+    #       5
+    #      3 8
+    #     2 4 
+    #    1   
     def isValidRec(self, node, low, high):
         if not node:
             return True
         if node.val <= low or node.val >= high:
             return False
-        
-        return self.isValidRec(node.left, low, node.val) and self.isValidRec(node.right, node.val, high)
+        return self.isValidRec(node.left, low, node.val) and self.isValidRec(node.right, node.val, high)    
+
 
     def isValidIter(self, root):
         if not root:
