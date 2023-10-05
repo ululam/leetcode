@@ -6,10 +6,11 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        return self.isValidRec(root)
+        return self.isValidRec(root, -math.inf, math.inf)
         # return self.isValidIter(root)
 
-    def isValidRec(self, node, low=-math.inf, high=math.inf):
+    # [1,2,3,4,5] 
+    def isValidRec(self, node, low, high):
         if not node:
             return True
         if node.val <= low or node.val >= high:
