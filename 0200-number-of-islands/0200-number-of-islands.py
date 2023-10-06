@@ -11,16 +11,21 @@ class Solution:
                     queue = [(x,y)]
                     while queue:
                         pX, pY = queue.pop()
-                        if pX > 0 and grid[pX-1][pY] == '1':
-                            queue.append((pX-1, pY))
-                        if pX < len(grid)-1 and grid[pX+1][pY] == '1':
-                            queue.append((pX+1, pY))
-                        if pY > 0 and grid[pX][pY-1] == '1':
-                            queue.append((pX, pY-1))
-                        if pY < len(grid[pX])-1 and grid[pX][pY+1] == '1':
-                            queue.append((pX, pY+1))
                         grid[pX][pY] = '0'
+                        if pX > 0:
+                            self._checkAppendAndSet0(grid, queue, pX-1, pY)
+                        if pX < len(grid)-1:
+                            self._checkAppendAndSet0(grid, queue, pX+1, pY)
+                        if pY > 0:
+                            self._checkAppendAndSet0(grid, queue, pX, pY-1)
+                        if pY < len(grid[pX])-1:
+                            self._checkAppendAndSet0(grid, queue, pX, pY+1)
         return num
+
+    def _checkAppendAndSet0(self, grid, queue, x, y):
+        if grid[x][y] == '1':
+            grid[x][y] = '0'
+            queue.append((x,y))
 
 
     def numIslandsDFS(self, grid: List[List[str]]) -> int:
