@@ -14,8 +14,6 @@ class Solution:
         while queue:
             x, y = queue.pop(0)
             if x == -1:
-                print(f"Minutes: {minutes}")
-                print(f"queue: {queue}")
                 if queue:
                     minutes += 1
                     queue.append((-1, minutes+1))
