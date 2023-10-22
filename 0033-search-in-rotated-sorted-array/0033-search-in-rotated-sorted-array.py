@@ -5,13 +5,13 @@ class Solution:
             mid = low + ((high-low)>>1)
             if nums[mid] == target:
                 return mid
-            if nums[mid] >= nums[low]:
+            if nums[mid] >= nums[0]:
                 if target >= nums[low] and target < nums[mid]:
                     high = mid-1
                 else:
                     low = mid + 1
             else:
-                if target <= nums[high] and target > nums[mid]:
+                if target <= nums[-1] and target > nums[mid]:
                     low = mid + 1
                 else:
                     high = mid - 1
