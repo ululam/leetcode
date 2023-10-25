@@ -1,7 +1,7 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        # return self.permuteMy(nums)
-        return self.permuteBt(nums)
+        return self.permuteMy(nums)
+        # return self.permuteBt(nums)
 
     def permuteBt(self, nums: List[int]) -> List[List[int]]:
         def backtrack(curr):
