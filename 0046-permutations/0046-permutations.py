@@ -21,7 +21,7 @@ class Solution:
             return [[number]]
         res = []
         for i in range(len(lst)+1):
-            newList = list(lst)
+            newList = lst[:]
             newList.insert(i, number)
             res.append(newList)
         return res
