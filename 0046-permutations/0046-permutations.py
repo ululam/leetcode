@@ -17,8 +17,6 @@ class Solution:
         return res
     
     def permute1(self, number, lst):
-        if not lst:
-            return [[number]]
         res = []
         for i in range(len(lst)+1):
             newList = lst[:]
