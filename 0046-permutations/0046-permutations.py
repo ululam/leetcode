@@ -1,5 +1,23 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        # return self.permuteMy(None, nums)
+        return self.permuteBt(nums)
+
+    def permuteBt(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(curr):
+            if len(nums) == len (curr):
+                res.append(curr[:])
+                return
+            for n in nums:
+                if n not in curr:
+                    curr.append(n)
+                    backtrack(curr)
+                    curr.pop()
+        res = []
+        backtrack([])
+        return res
+
+    def permuteMy(self, nums: List[int]) -> List[List[int]]:
         return self.doPermute(None, nums)
 
     def doPermute(self, number, nums: List[int]) -> List[List[int]]:
