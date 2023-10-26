@@ -1,11 +1,11 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        return self.permuteMy(nums)
-        # return self.permuteBt(nums)
+        return self.permuteDfs(nums)
+        # return self.permuteBackTrack(nums)
 
-    def permuteBt(self, nums: List[int]) -> List[List[int]]:
+    def permuteBackTrack(self, nums: List[int]) -> List[List[int]]:
         def backtrack(curr):
-            if len(nums) == len (curr):
+            if len(nums) == len(curr):
                 res.append(curr[:])
                 return
             for n in nums:
@@ -17,13 +17,14 @@ class Solution:
         backtrack([])
         return res
 
-    def permuteMy(self, nums: List[int]) -> List[List[int]]:
+# ---------------
+
+    def permuteDfs(self, nums: List[int]) -> List[List[int]]:
         return self.doPermute(None, nums)
 
     def doPermute(self, number, nums: List[int]) -> List[List[int]]:
         if not nums:
             return [[number]] if number else [[]]
-        
         perms = self.doPermute(nums[0], nums[1:])
         return self.permuteSub(number, perms) if number is not None else perms
 
