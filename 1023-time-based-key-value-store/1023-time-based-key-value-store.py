@@ -1,4 +1,4 @@
-class TimeMap:
+class TimeMap2:
     def __init__(self):
         self.key_time_map = {}
 
@@ -32,7 +32,7 @@ class TimeMap:
         # If iterator points to first element it means, no time <= timestamp exists.
         return "" if right == 0 else self.key_time_map[key][right - 1][1]
 
-class TimeMap2:
+class TimeMap:
 
     def __init__(self):
         self.map = {}
@@ -43,8 +43,9 @@ class TimeMap2:
         self.map[key].append((timestamp, value))
 
     def get(self, key: str, timestamp: int) -> str:
-        if key not in self.map:
+        if key not in self.map or timestamp < self.map[key][0][0]:
             return ""
+                    
         lst = self.map[key]
         return self._binary_search(lst, timestamp)
 
