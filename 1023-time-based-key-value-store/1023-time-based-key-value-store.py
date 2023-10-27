@@ -16,31 +16,31 @@ class TimeMap:
         return self._binary_search(lst, timestamp)
 
     def _binary_search(self, lst, timestamp):
-        left, right = 0, len(lst)
-        while left < right:
-            mid = (left + right) // 2
-            if lst[mid][0] <= timestamp:
-                left = mid + 1
-            else:
-                right = mid
-
-        # If iterator points to first element it means, no time <= timestamp exists.
-        return "" if right == 0 else lst[right - 1][1]        
-
-        # left, right = 0, len(lst)-1
-        # t, val = 0, ""
-        # while left <= right:
-        #     mid = left + ((right - left) >> 1)
-        #     t, val = lst[mid]
-        #     if t == timestamp:
-        #         return val
-        #     if t < timestamp:
-        #         if mid < len(lst)-1 and lst[mid+1][0] > timestamp:
-        #             return val
+        # left, right = 0, len(lst)
+        # while left < right:
+        #     mid = (left + right) // 2
+        #     if lst[mid][0] <= timestamp:
         #         left = mid + 1
         #     else:
-        #         right = mid - 1
-        # return val if t <= timestamp else ""
+        #         right = mid
+
+        # # If iterator points to first element it means, no time <= timestamp exists.
+        # return "" if right == 0 else lst[right - 1][1]        
+
+        left, right = 0, len(lst)-1
+        t, val = 0, ""
+        while left <= right:
+            mid = left + ((right - left) >> 1)
+            t, val = lst[mid]
+            if t == timestamp:
+                return val
+            if t < timestamp:
+                if mid < len(lst)-1 and lst[mid+1][0] > timestamp:
+                    return val
+                left = mid + 1
+            else:
+                right = mid - 1
+        return val if t <= timestamp else ""
 
 
 # Your TimeMap object will be instantiated and called as such:
