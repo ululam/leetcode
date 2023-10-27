@@ -27,16 +27,20 @@ class TimeMap:
         # # If iterator points to first element it means, no time <= timestamp exists.
         # return "" if right == 0 else lst[right - 1][1]        
 
-        left, right = 0, len(lst)
+        left, right = 0, len(lst)-1
         t, val = 0, ""
-        while left < right:
+        while left <= right:
             mid = left + ((right - left) >> 1)
             t, val = lst[mid]
-            if t <= timestamp:
+            if t == timestamp:
+                return val
+            if t < timestamp:
+                if mid < len(lst)-1 and lst[mid+1][0] > timestamp:
+                    return val
                 left = mid + 1
             else:
-                right = mid
-        return "" if right == 0 else lst[right - 1][1]    
+                right = mid - 1
+        return val if t <= timestamp else ""
 
 
 # Your TimeMap object will be instantiated and called as such:
