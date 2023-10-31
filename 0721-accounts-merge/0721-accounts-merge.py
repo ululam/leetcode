@@ -17,23 +17,18 @@ class Solution:
                 if not neib in visited:
                     DFS(acc, neib)
 
-
-        n = len(accounts)
         for a in accounts:
-            aSize = len(a)
-            email1 = a[1]
-            for j in range(2, aSize):
-                email = a[j]
-                addEmail(email, email1)
-                addEmail(email1, email)
+            for j in range(2, len(a)):
+                addEmail(a[1], a[j])
+                addEmail(a[j], a[1])
         
         mergedAccs = []
         for a in accounts:
             email1 = a[1]
             if email1 not in visited:
-                mergedA = [a[0]]
+                mergedA = []
                 DFS(mergedA, email1)
-                mergedA = [mergedA[0]] + sorted(mergedA[1:])
+                mergedA = [a[0]] + sorted(mergedA)
                 mergedAccs.append(mergedA)
         
         return mergedAccs
