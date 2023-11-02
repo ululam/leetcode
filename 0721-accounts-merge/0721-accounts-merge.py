@@ -26,8 +26,8 @@ class DSU:
 
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
-        return self.accountsMergeGraph(accounts)
-        # return self.accountsMergeDSU(accounts)
+        # return self.accountsMergeGraph(accounts)
+        return self.accountsMergeDSU(accounts)
 
     def accountsMergeDSU(self, accounts: List[List[str]]) -> List[List[str]]:
         # Disjoint Set Union aka Union-Find
@@ -42,11 +42,9 @@ class Solution:
                     emailGroup[email] = i
         
         # Store email in repr groups
-        components = {}
+        components = defaultdict(list)
         for email, group in emailGroup.items():
             groupRep = dsu.find(group)
-            if groupRep not in components:
-                components[groupRep] = []
             components[groupRep].append(email)
 
         # Sort and add name
