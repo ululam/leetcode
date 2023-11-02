@@ -26,8 +26,8 @@ class DSU:
 
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
-        # return self.accountsMergeGraph(accounts)
-        return self.accountsMergeDSU(accounts)
+        return self.accountsMergeGraph(accounts)
+        # return self.accountsMergeDSU(accounts)
 
     def accountsMergeDSU(self, accounts: List[List[str]]) -> List[List[str]]:
         # Disjoint Set Union aka Union-Find
