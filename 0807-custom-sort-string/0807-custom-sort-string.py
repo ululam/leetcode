@@ -7,10 +7,10 @@ class Solution:
 
         res = []
         for c in order:
-            res.append(c * counts[c])
-            counts[c] = 0
+            res += [c] * counts[c]
+            del counts[c]
         for c in counts:
             # Zeros counted chars are auto-filtered here
-            res.append(c * counts[c])
+            res += [c] * counts[c]
 
         return "".join(res)
