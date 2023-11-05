@@ -8,9 +8,9 @@ class Solution:
         res = []
         for c in order:
             res += [c] * counts[c]
-            del counts[c]
+            counts[c] = 0
         for c in counts:
-            # Zeros counted chars are auto-filtered here
+            # Zeros counted chars are auto-filtered
             res += [c] * counts[c]
 
         return "".join(res)
