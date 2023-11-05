@@ -13,10 +13,6 @@ class TrieNode:
         self.child[c].isWord = self.child[c].isWord or len(word) == 1
         self.child[c].add(word[1:])
 
-    def __str__(self):
-        nl = '\n'
-        return f"{self.letter}, {self.isWord} --> {[str(c) for c in self.child.values()]}"
-
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         # return self.wordBreakBFS(s, wordDict)
@@ -26,7 +22,6 @@ class Solution:
 
     def wordBreakDpTrieOptimised(self, s, wordDict):
         root = self._buildTrie(wordDict)
-        print(f"{root}")
         n = len(s)
         dp = [False] * n
         for i in range(n):
