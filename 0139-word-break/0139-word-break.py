@@ -9,8 +9,8 @@ class Solution:
         dp = [False] * n
         for i in range(n):
             for word in wordDict:
-                # Handle out of bound case
-                if i < len(word) - 1:
+                # Handle out of bound case (word is at the beginning and is bigger that current substr)
+                if len(word) -1 > i:
                     continue
                 if i == len(word) - 1 or dp[i - len(word)]:
                     start = i - len(word) + 1
