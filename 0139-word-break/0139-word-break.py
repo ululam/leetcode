@@ -1,8 +1,53 @@
+class TrieNode:
+    def __init__(self, letter, isWord = False):
+        self.letter = letter
+        self.child = {}
+        self.isWord = isWord
+
+    def add(self, word):
+        if not word:
+            return
+        c = word[0]
+        if c not in self.child:
+            self.child[c] = TrieNode(c)
+        self.child[c].isWord = self.child[c].isWord or len(word) == 1
+        self.child[c].add(word[1:])
+
+    def __str__(self):
+        nl = '\n'
+        return f"{self.letter}, {self.isWord} --> {[str(c) for c in self.child.values()]}"
+
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         # return self.wordBreakBFS(s, wordDict)
         # return self.wordBreakDpTopDown(s, wordDict)
-        return self.wordBreakDpBottomUp(s, wordDict)
+        # return self.wordBreakDpBottomUp(s, wordDict)
+        return self.wordBreakDpTrieOptimised(s, wordDict)
+
+    def wordBreakDpTrieOptimised(self, s, wordDict):
+        root = self._buildTrie(wordDict)
+        print(f"{root}")
+        n = len(s)
+        dp = [False] * n
+        for i in range(n):
+            if i == 0 or dp[i-1]:
+                curr = root
+                for j in range(i, n):
+                    c = s[j]
+                    if c not in curr.child:
+                        # No word exits
+                        break
+                    curr = curr.child[c]
+                    if curr.isWord:
+                        dp[j] = True
+
+        return dp[n-1]
+        
+    def _buildTrie(self, wordDict) -> TrieNode:
+        root = TrieNode(None)
+        for word in wordDict:
+            root.add(word)
+        return root
 
     def wordBreakDpBottomUp(self, s, wordDict):
         n = len(s)
@@ -59,3 +104,4 @@ class Solution:
                     queue.append(end)
                     seen.add(end)
         return False
+
