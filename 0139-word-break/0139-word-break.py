@@ -10,11 +10,13 @@ class Solution:
         for i in range(n):
             for word in wordDict:
                 # Handle out of bound case (word is at the beginning and is bigger that current substr)
-                if len(word) -1 > i:
+                start = i - len(word) + 1
+                if start < 0:
                     continue
-                if i == len(word) - 1 or dp[i - len(word)]:
-                    start = i - len(word) + 1
+                # If word concludes the string (is prefix word) or there's solution at index i - len(word)
+                if start == 0 or dp[i - len(word)]:
                     end = i + 1
+                    # Check that substring is the word
                     if s[start:end] == word:
                         dp[i] = True
                         break
