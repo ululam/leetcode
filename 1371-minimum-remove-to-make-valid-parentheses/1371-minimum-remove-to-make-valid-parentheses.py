@@ -4,13 +4,12 @@ class Solution:
         return self.minRemoveToMakeValidStackless(s)
 
     def minRemoveToMakeValidStackless(self, s: str) -> str:
+        l = list(s)
         unmatchedOpenCounter, totalOpenCounter = 0, 0
-        removeIndexes = set()
-        for i in range(len(s)):
-            c = s[i]
+        for i, c in enumerate(l):
             if c == ')':
                 if unmatchedOpenCounter == 0:
-                    removeIndexes.add(i)
+                    l[i] = ''
                 else:
                     unmatchedOpenCounter -= 1
             elif c == '(':
@@ -19,10 +18,7 @@ class Solution:
 
         leaveOpenCount = totalOpenCounter - unmatchedOpenCounter
         res = []
-        for i in range(len(s)):
-            if i in removeIndexes:
-                continue
-            c = s[i]
+        for c in l:
             if c == '(':
                 if leaveOpenCount > 0:
                     res.append(c)
