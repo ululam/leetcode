@@ -1,7 +1,7 @@
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
-        # return self.minRemoveToMakeValidStack(s)
-        return self.minRemoveToMakeValidStackless(s)
+        return self.minRemoveToMakeValidStack(s)
+        # return self.minRemoveToMakeValidStackless(s)
 
     def minRemoveToMakeValidStackless(self, s: str) -> str:
         l = list(s)
@@ -32,19 +32,18 @@ class Solution:
 
     def minRemoveToMakeValidStack(self, s: str) -> str:
         stack = []
+        res = list(s)
         for i in range(len(s)):
             c = s[i]
             if c == ')':
-                if stack and stack[-1][0] == '(':
+                if stack:
                     stack.pop()
                 else:
-                    stack.append((c, i))
+                    res[i] = ""
             if c == '(':
-                stack.append((c, i))
+                stack.append(i)
 
-        toRemove = set([p[1] for p in stack])
-        res = []
-        for i in range(len(s)):
-            if i not in toRemove:
-                res += s[i]
+        for i in stack:
+            res[i] = ""
+        
         return "".join(res)
