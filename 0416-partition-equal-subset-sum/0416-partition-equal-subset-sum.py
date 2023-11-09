@@ -4,7 +4,8 @@ class Solution:
         if summa & 1 == 1: # Odd summa
             return False
         
-        memo = {}
+        # memo = {}
+        
         @cache
         def dfs(n, subSum) -> bool:
             if subSum == 0:
