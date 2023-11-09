@@ -5,6 +5,7 @@ class Solution:
             return False
         
         memo = {}
+        @cache
         def dfs(n, subSum) -> bool:
             if subSum == 0:
                 return True
